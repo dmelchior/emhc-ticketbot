@@ -16,5 +16,20 @@ document.addEventListener("change", function(event) {
   d = n.getDate();
   document.getElementById("date").innerHTML = m + "/" + d + "/" + y;
 
+  
+  var slider = document.getElementById('test-slider');
+  noUiSlider.create(slider, {
+   start: [20, 80],
+   connect: true,
+   step: 1,
+   orientation: 'horizontal', // 'horizontal' or 'vertical'
+   range: {
+     'min': 0,
+     'max': 100
+   },
+   format: wNumb({
+     decimals: 0
+   })
+  });
 // var d = new Date();
 // document.getElementById("demo").innerHTML = d;

@@ -8,6 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap-reboot.min.css">        
         <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" href="esignature.css">
         
     </head>
     <body>
@@ -60,7 +61,7 @@
                     <!-- <label class="form-element-label" for="field-omv6eo-metm0n-5j55wv-w3wbws-6nm2b9">Company Name</label> -->
                 </div>
                 <div class="form-element form-input">
-                    <input id="field-omv6eo-metm0n-5j55wv-w3wbws-6nm2b9" class="form-element-field" placeholder="Please fill in the full name" type="input" required/>
+                    <input id="field-omv6eo-metm0n-5j55wv-w3wbws-6nm2b9" class="form-element-field" placeholder="Please fill in the full company name" type="input" required/>
                     <div class="form-element-bar"></div>
                     <label class="form-element-label" for="field-omv6eo-metm0n-5j55wv-w3wbws-6nm2b9">Company Name</label>
                 </div>
@@ -76,62 +77,66 @@
                     <label class="form-element-label" for="field-uyzeji-352rnc-4rv3g1-bvlh88-9dewuz">Email</label>
                     <small class="form-element-hint">We will never spam you!</small>
                 </div> -->
+                <div class="form-element form-select">
+                    <select id="field-be1h8i-ll2hpg-q4efzm-nfjj1e-udkw5r" class="form-element-field">
+                        <option disabled selected value="" class="form-select-placeholder"></option>
+                        <option value="Cash">Paying with Cash</option>
+                        <option value="Account">Adding to Account</option>
+                        <option value="Credit" disabled>Paying with Credit Card (Call Office)</option>
+                    </select>
+                    <div class="form-element-bar"></div>
+                    <label class="form-element-label" for="field-be1h8i-ll2hpg-q4efzm-nfjj1e-udkw5r">Select a Payment Type</label>
+                </div>
                 <div class="form-checkbox form-checkbox-inline">
-                    <div class="form-checkbox-legend">Material (check all that apply)</div>
+                    <div class="form-checkbox-legend">Materials (check all that apply):</div>
                     <label class="form-checkbox-label">
-                        <input name=rap class="form-checkbox-field" type="checkbox" />
+                        <input name=trees class="form-checkbox-field" type="checkbox" />
                         <i class="form-checkbox-button"></i>
                         <span>Trees</span>
                     </label>
                     <label class="form-checkbox-label">
-                        <input name=pop class="form-checkbox-field" type="checkbox" />
+                        <input name=concrete class="form-checkbox-field" type="checkbox" />
                         <i class="form-checkbox-button"></i>
                         <span>Concrete</span>
                     </label>
                     <label class="form-checkbox-label">
-                        <input name=rock class="form-checkbox-field" type="checkbox" />
+                        <input name=asphalt class="form-checkbox-field" type="checkbox" />
                         <i class="form-checkbox-button"></i>
                         <span>Asphalt</span>
                     </label>
                     <label class="form-checkbox-label">
-                        <input name=metal class="form-checkbox-field" type="checkbox" />
+                        <input name=brick class="form-checkbox-field" type="checkbox" />
                         <i class="form-checkbox-button"></i>
                         <span>Brick</span>
                     </label>
                     <label class="form-checkbox-label">
-                        <input name=r_b class="form-checkbox-field" type="checkbox" />
+                        <input name=block class="form-checkbox-field" type="checkbox" />
                         <i class="form-checkbox-button"></i>
                         <span>Block</span>
                     </label>
                     <label class="form-checkbox-label">
-                        <input name=r_b class="form-checkbox-field" type="checkbox" />
+                        <input name=rock class="form-checkbox-field" type="checkbox" />
                         <i class="form-checkbox-button"></i>
                         <span>Rock</span>
                     </label>
                     <label class="form-checkbox-label">
-                        <input name=r_b class="form-checkbox-field" type="checkbox" />
+                        <input name=dirt class="form-checkbox-field" type="checkbox" />
                         <i class="form-checkbox-button"></i>
                         <span>Dirt</span>
                     </label>
                     <label class="form-checkbox-label">
-                        <input name=r_b class="form-checkbox-field" type="checkbox" />
+                        <input name=mud class="form-checkbox-field" type="checkbox" />
                         <i class="form-checkbox-button"></i>
                         <span>Mud</span>
                     </label>
                 </div>
-                <div class="form-element form-select">
-                    <select id="field-be1h8i-ll2hpg-q4efzm-nfjj1e-udkw5r" class="form-element-field">
-                        <option disabled selected value="" class="form-select-placeholder"></option>
-                        <option value="Rap">Rap</option>
-                        <option value="Pop">Pop</option>
-                        <option value="Rock">Rock</option>
-                        <option value="Metal">Metal</option>
-                        <option value="R&amp;B">R&amp;B</option>
-                    </select>
+                <div class="form-element form-input">
+                    <input id="field-yards" class="form-element-field" placeholder="Enter the size of your load in yards" type="input" required/>
                     <div class="form-element-bar"></div>
-                    <label class="form-element-label" for="field-be1h8i-ll2hpg-q4efzm-nfjj1e-udkw5r">Select your favorite music genre</label>
+                    <label class="form-element-label" for="field-yards">Yardage</label>
+                    <small class="form-element-hint">Not sure? <a href="https://www.google.com">Calculate the yardage here.</a></small>
                 </div>
-                <div class="form-radio form-radio-block">
+                <!-- <div class="form-radio form-radio-block">
                     <div class="form-radio-legend">I prefer…</div>
                     <label class="form-radio-label">
                         <input name=eat class="form-radio-field" type="radio" value="vagatarian food" />
@@ -153,21 +158,38 @@
                         <i class="form-radio-button"></i>
                         <span>food with meat</span>
                     </label>
-                </div>
+                </div> -->
                 <div class="form-element form-textarea">
-                    <textarea id="field-3naeph-0f3yuw-x153ph-dzmahy-qhkmgm" class="form-element-field" placeholder=" "></textarea>
+                    <textarea id="field-optional-info" class="form-element-field" placeholder="Additional Information [Truck/Trailer Number, P.O., Job Info, Etc.]"></textarea>
                     <div class="form-element-bar"></div>
-                    <label class="form-element-label" for="field-3naeph-0f3yuw-x153ph-dzmahy-qhkmgm">Your Message</label>
-
+                    <label class="form-element-label" for="field-optional-info">Optional Information</label>
+                </div>
+                <div class="form-element form-input">
+                    <input id="field-driver-name" class="form-element-field" placeholder="Driver first and last name" type="input" required/>
+                    <div class="form-element-bar"></div>
+                    <label class="form-element-label" for="field-driver-name">Driver Name</label>
                 </div>
             </fieldset>
             <div class="form-actions">
-                <button class="form-btn" type="submit">Send inquiry</button>
+                <button class="form-btn" type="submit">Complete Ticket</button>
                 <button class="form-btn-cancel -nooutline" type="reset">Cancel</button>
+            </div>
+            <div id="container">
+                <div id="sub-container">
+                    <div id="sub-container-x">&#10008;</div>
+                    <div id="sub-container-line"></div>
+                    <div id="sub-container-date"></div>
+                </div>
+                <canvas id='myCanvas' width="400" height="100"></canvas>
+            </div>
+            <div>
+                <div class="btn-container"><a id="save" download="image.png"><button type="button" class="my-button" onClick="save()">Save</button></a><button id="clear" class="my-button" type="button">Clear</button></div>
             </div>
         </form>
         <!-- Compiled and minified JavaScript -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src="script.js"></script>
+        <script src="esignature.js"></script>
     </body>
 </html>
