@@ -1,85 +1,134 @@
-$(document).ready(function(){
-	w = 0, h = 0, canvas = null, ctx = null, flag = false,
-		prevX = 0,
-		currX = 0,
-		prevY = 0,
-		currY = 0,
-	 	x = "#000",
-		y = 2;
-		
-	init();
-	
-	$("#clear").click(function(){
-		ctx.clearRect(0, 0, w, h);
-	});
-
-	var date = new Date();
-	var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-	$("#sub-container-date").html(months[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear());
-});
-
-function init(){
-	canvas = $("#myCanvas")[0];
-	ctx = canvas.getContext("2d");
-	w = canvas.width;
-	h = canvas.height;
-	
-	$("#myCanvas").on("mousemove", function(e){
-		//console.log("move");
-		findxy('move', e);
-	});
-	$("#myCanvas").on("mousedown", function(e){
-		//console.log("down");
-		findxy('down', e);
-	});
-	$("#myCanvas").on("mouseup", function(e){
-		//console.log("up");
-		findxy('up', e);
-	});
-	$("#myCanvas").on("mouseout", function(e){
-		//console.log("out");
-		findxy('out', e);
-	});
-}
-
-function findxy(res, e){
-	if(res == 'down'){
-		prevX = currX;
-		prevY = currY;
-		currX = e.clientX - $("#myCanvas").offset().left;
-		currY = e.clientY - $("#myCanvas").offset().top;
-		
-		flag = true;
-	}
-	if(res == 'up' || res == 'out'){
-		flag = false;
-	}
-	if(res == 'move'){
-		if(flag){
-			prevX = currX;
-			prevY = currY;
-			currX = e.clientX - $("#myCanvas").offset().left;
-			currY = e.clientY - $("#myCanvas").offset().top;
-			draw();
-		}
-	}
-}
-
-function draw(){
-	ctx.beginPath();
-	ctx.moveTo(prevX, prevY);
-	ctx.lineTo(currX, currY);
-	ctx.strokeStyle = "#000";
-	ctx.lineWidth = 2;
-	ctx.stroke();
-	ctx.closePath();
-}
-
-
-
-function save(){
-	var download = $("#save");
-	var image = $("#myCanvas")[0].toDataURL("image/png").replace("image/png", "image/octet-stream");
-	$("#save").attr("href",image);	
-	
-}
+(function() {
+    window.requestAnimFrame = (function(callback) {
+      return window.requestAnimationFrame ||
+        window.webkitRequestAnimationFrame ||
+        window.mozRequestAnimationFrame ||
+        window.oRequestAnimationFrame ||
+        window.msRequestAnimaitonFrame ||
+        function(callback) {
+          window.setTimeout(callback, 1000 / 60);
+        };
+    })();
+  
+    var canvas = document.getElementById("sig-canvas");
+    var ctx = canvas.getContext("2d");
+    ctx.strokeStyle = "#222222";
+    ctx.lineWidth = 4;
+  
+    var drawing = false;
+    var mousePos = {
+      x: 0,
+      y: 0
+    };
+    var lastPos = mousePos;
+  
+    canvas.addEventListener("mousedown", function(e) {
+      drawing = true;
+      lastPos = getMousePos(canvas, e);
+    }, false);
+  
+    canvas.addEventListener("mouseup", function(e) {
+      drawing = false;
+    }, false);
+  
+    canvas.addEventListener("mousemove", function(e) {
+      mousePos = getMousePos(canvas, e);
+    }, false);
+  
+    // Add touch event support for mobile
+    canvas.addEventListener("touchstart", function(e) {
+  
+    }, false);
+  
+    canvas.addEventListener("touchmove", function(e) {
+      var touch = e.touches[0];
+      var me = new MouseEvent("mousemove", {
+        clientX: touch.clientX,
+        clientY: touch.clientY
+      });
+      canvas.dispatchEvent(me);
+    }, false);
+  
+    canvas.addEventListener("touchstart", function(e) {
+      mousePos = getTouchPos(canvas, e);
+      var touch = e.touches[0];
+      var me = new MouseEvent("mousedown", {
+        clientX: touch.clientX,
+        clientY: touch.clientY
+      });
+      canvas.dispatchEvent(me);
+    }, false);
+  
+    canvas.addEventListener("touchend", function(e) {
+      var me = new MouseEvent("mouseup", {});
+      canvas.dispatchEvent(me);
+    }, false);
+  
+    function getMousePos(canvasDom, mouseEvent) {
+      var rect = canvasDom.getBoundingClientRect();
+      return {
+        x: mouseEvent.clientX - rect.left,
+        y: mouseEvent.clientY - rect.top
+      }
+    }
+  
+    function getTouchPos(canvasDom, touchEvent) {
+      var rect = canvasDom.getBoundingClientRect();
+      return {
+        x: touchEvent.touches[0].clientX - rect.left,
+        y: touchEvent.touches[0].clientY - rect.top
+      }
+    }
+  
+    function renderCanvas() {
+      if (drawing) {
+        ctx.moveTo(lastPos.x, lastPos.y);
+        ctx.lineTo(mousePos.x, mousePos.y);
+        ctx.stroke();
+        lastPos = mousePos;
+      }
+    }
+  
+    // Prevent scrolling when touching the canvas
+    document.body.addEventListener("touchstart", function(e) {
+      if (e.target == canvas) {
+        e.preventDefault();
+      }
+    }, false);
+    document.body.addEventListener("touchend", function(e) {
+      if (e.target == canvas) {
+        e.preventDefault();
+      }
+    }, false);
+    document.body.addEventListener("touchmove", function(e) {
+      if (e.target == canvas) {
+        e.preventDefault();
+      }
+    }, false);
+  
+    (function drawLoop() {
+      requestAnimFrame(drawLoop);
+      renderCanvas();
+    })();
+  
+    function clearCanvas() {
+      canvas.width = canvas.width;
+    }
+  
+    // Set up the UI
+    var sigText = document.getElementById("sig-dataUrl");
+    var sigImage = document.getElementById("sig-image");
+    var clearBtn = document.getElementById("sig-clearBtn");
+    var submitBtn = document.getElementById("sig-submitBtn");
+    clearBtn.addEventListener("click", function(e) {
+      clearCanvas();
+      sigText.innerHTML = "Data URL for your signature will go here!";
+      sigImage.setAttribute("src", "");
+    }, false);
+    submitBtn.addEventListener("click", function(e) {
+      var dataUrl = canvas.toDataURL();
+      sigText.innerHTML = dataUrl;
+      sigImage.setAttribute("src", dataUrl);
+    }, false);
+  
+  })();
