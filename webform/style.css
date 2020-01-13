@@ -574,6 +574,7 @@
   
   body {
     margin: 40px auto;
-    background-image: linear-gradient(to top, #a3bded 0%, #6991c7 100%);
+    background-color: #1b3264;
+    /* background-image: linear-gradient(to top, #a3bded 0%, #6991c7 100%); */
   }
   
